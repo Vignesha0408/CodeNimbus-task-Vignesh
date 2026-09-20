@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engagement Invitation | Ananya & Aarav</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #ffd700 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Door/Curtain Screen */
+        .door-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #ffd700 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 2s ease-in-out, visibility 2s ease-in-out;
+            overflow: hidden;
+        }
+
+        .door-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Decorative Flowers on Door Screen */
+        .door-flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .door-flower {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .door-flower.yellow {
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .door-flower.blue {
+            color: #87ceeb;
+            text-shadow: 0 0 20px rgba(135, 206, 235, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .door-content {
+            text-align: center;
+            color: #ffd700;
+            position: relative;
+            z-index: 10;
+        }
+
+        .door {
+            width: 250px;
+            height: 350px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: 8px solid #ffd700;
+            border-radius: 15px 15px 0 0;
+            margin: 0 auto 30px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        /* Door Decorations */
+        .door-decoration {
+            position: absolute;
+            font-size: 2rem;
+        }
+
+        .door-top-left {
+            top: 10px;
+            left: 10px;
+        }
+
+        .door-top-right {
+            top: 10px;
+            right: 10px;
+        }
+
+        .door-bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .door-bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .door::before {
+            content: '';
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ffd700;
+        }
+
+        .door-knocker {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffec8b 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .door-knocker i {
+            color: #1e3c72;
+            font-size: 1.8rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            50% { transform: translate(-50%, -50%) scale(1.15); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+
+        .click-hint {
+            font-size: 1.3rem;
+            color: #ffd700;
+            animation: bounce 3s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Falling Flowers */
+        .falling-flowers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        .flower.yellow {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .flower.blue {
+            color: #87ceeb;
+            text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 60, 114, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #ffd700;
+        }
+
+        /* Music Button */
+        .music-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .music-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .music-button i {
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        .music-button.playing {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Bordered Cloth Background */
+        .cloth-border {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 50;
+            border: 15px solid #1e3c72;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .cloth-border::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 3px solid #ffd700;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9) 0%, rgba(42, 82, 152, 0.9) 50%, rgba(255, 215, 0, 0.8) 100%);
+            position: relative;
+            padding: 100px 20px 50px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .flower-decoration {
+            position: absolute;
+            font-size: 3rem;
+            color: #ffd700;
+            opacity: 0.3;
+        }
+
+        .flower-top-left {
+            top: -50px;
+            left: -50px;
+        }
+
+        .flower-top-right {
+            top: -50px;
+            right: -50px;
+        }
+
+        .flower-bottom-left {
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .flower-bottom-right {
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .save-the-date {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .couple-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .couple-names span {
+            display: block;
+        }
+
+        .couple-names .ampersand {
+            font-size: 2rem;
+            color: #ffd700;
+        }
+
+        .engagement-text {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .engagement-date {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .venue {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .maps-btn {
+            background: #ffd700;
+            color: #1e3c72;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+        }
+
+        .maps-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #e8f4f8 0%, #fff9e6 100%);
+            position: relative;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1e3c72;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            min-width: 100px;
+            border: 3px solid #ffd700;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-box .num {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-box .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* About Couple Section */
+        .about-couple {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #fff9e6 100%);
+            position: relative;
+        }
+
+        .about-couple-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .couple-person {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .couple-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid #1e3c72;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .couple-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #1e3c72;
+        }
+
+        .couple-parents {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .couple-desc {
+            color: #4a5568;
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Wishes Section */
+        .wishes-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #fff9e6 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .wishes-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1e3c72;
+        }
+
+        .wishes-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .wish-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 3px solid #ffd700;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .wish-message {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #4a5568;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .wish-author {
+            color: #1e3c72;
+            font-weight: 600;
+        }
+
+        .wishes-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .wishes-nav button {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Send Wishes Section */
+        .send-wishes {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .send-wishes-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .send-wishes-subtitle {
+            font-style: italic;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .wishes-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #ffd700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e8f4f8;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ffec8b 100%);
+            color: #1e3c72;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #fff9e6 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .schedule-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1e3c72;
+        }
+
+        .schedule-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .schedule-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            min-width: 250px;
+            text-align: center;
+            border: 3px solid #ffd700;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .schedule-card i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .schedule-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .schedule-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Location Section */
+        .location-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #fff9e6 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .location-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1e3c72;
+        }
+
+        .location-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .location-map {
+            flex: 1;
+            min-width: 300px;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid #ffd700;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .location-info {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: left;
+            border: 3px solid #ffd700;
+        }
+
+        .location-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #1e3c72;
+        }
+
+        .location-info p {
+            color: #4a5568;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .location-info button {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e3c72;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-branding {
+            margin-bottom: 20px;
+        }
+
+        .footer-branding span {
+            color: #ffd700;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ffd700;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #a0522d;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #ffd700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+                gap: 20px;
+            }
+
+            .couple-names {
+                font-size: 2.5rem;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .time-box {
+                min-width: 80px;
+                padding: 15px 20px;
+            }
+
+            .time-box .num {
+                font-size: 2rem;
+            }
+
+            .about-couple-container {
+                flex-direction: column;
+            }
+
+            .location-content {
+                flex-direction: column;
+            }
+
+            .cloth-border {
+                border-width: 10px;
+            }
+
+            .cloth-border::before {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Door/Curtain Screen -->
+    <div class="door-screen" id="doorScreen" onclick="openDoor()">
+        <!-- Decorative Flowers -->
+        <div class="door-flowers">
+            <div class="door-flower yellow" style="top: 10%; left: 5%;">🌸</div>
+            <div class="door-flower blue" style="top: 15%; right: 8%;">🌺</div>
+            <div class="door-flower yellow" style="top: 30%; left: 12%;">🌻</div>
+            <div class="door-flower blue" style="top: 25%; right: 15%;">🌷</div>
+            <div class="door-flower yellow" style="top: 50%; left: 8%;">🌹</div>
+            <div class="door-flower blue" style="top: 45%; right: 10%;">💐</div>
+            <div class="door-flower yellow" style="top: 70%; left: 15%;">🏵️</div>
+            <div class="door-flower blue" style="top: 65%; right: 12%;">🌼</div>
+            <div class="door-flower yellow" style="top: 85%; left: 5%;">🌸</div>
+            <div class="door-flower blue" style="top: 80%; right: 8%;">🌺</div>
+        </div>
+        
+        <div class="door-content">
+            <div class="door">
+                <!-- Door Decorations -->
+                <div class="door-decoration yellow" style="top: 20px; left: 20px;">🌸</div>
+                <div class="door-decoration blue" style="top: 20px; right: 20px;">🌺</div>
+                <div class="door-decoration yellow" style="bottom: 20px; left: 20px;">🌻</div>
+                <div class="door-decoration blue" style="bottom: 20px; right: 20px;">🌷</div>
+                
+                <div class="door-knocker">
+                    <i class="fas fa-hand-pointer"></i>
+                </div>
+            </div>
+            <p class="click-hint">Click to open the invitation</p>
+        </div>
+    </div>
+
+    <!-- Falling Flowers Container -->
+    <div class="falling-flowers" id="fallingFlowers"></div>
+
+    <!-- Bordered Cloth Background -->
+    <div class="cloth-border"></div>
+
+    <!-- Music Button -->
+    <div class="music-button" id="musicButton" onclick="toggleMusic()">
+        <i class="fas fa-music" id="musicIcon"></i>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="#home" class="nav-item active">Home</a>
+            <a href="#about" class="nav-item">About</a>
+            <a href="#gallery" class="nav-item">Gallery</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="flower-decoration flower-top-left">🌸</div>
+            <div class="flower-decoration flower-top-right">🌺</div>
+            <div class="flower-decoration flower-bottom-left">🌻</div>
+            <div class="flower-decoration flower-bottom-right">🌷</div>
+            
+            <div class="hero-content">
+                <p class="save-the-date">Save the date</p>
+                <h1 class="couple-names">
+                    <span>Ananya Sharma</span>
+                    <span class="ampersand">&</span>
+                    <span>Aarav Verma</span>
+                </h1>
+                <p class="engagement-text">are getting engaged on</p>
+                <p class="engagement-date">Saturday | 31st Oct | 2026</p>
+                <p class="venue">Hall Complex</p>
+                <button class="maps-btn" onclick="openMaps()">Open in Maps</button>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="countdown-section">
+            <h2 class="countdown-title">Let the countdown begin</h2>
+            <div class="countdown">
+                <div class="time-box">
+                    <span class="num" id="days">40</span>
+                    <span class="label">Days</span>
+                </div>
+                <div class="time-box">
+                    <span class="num" id="hours">11</span>
+                    <span class="label">Hrs</span>
+                </div>
+                <div class="time-box">
+                    <span class="num" id="minutes">36</span>
+                    <span class="label">Mins</span>
+                </div>
+                <div class="time-box">
+                    <span class="num" id="seconds">51</span>
+                    <span class="label">Secs</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Couple Section -->
+        <section id="about" class="about-couple">
+            <div class="about-couple-container">
+                <div class="couple-person">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Ananya Sharma" class="couple-photo">
+                    <h2 class="couple-name">Ananya Sharma</h2>
+                    <p class="couple-parents">D/o Mr. Rajesh & Mrs. Sunita Sharma</p>
+                    <p class="couple-desc">A free spirit wrapped in grace, Ananya moves through life with quiet confidence, an infectious laugh, and a kindness that makes everyone around her feel at home.</p>
+                </div>
+                <div class="couple-person">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Aarav Verma" class="couple-photo">
+                    <h2 class="couple-name">Aarav Verma</h2>
+                    <p class="couple-parents">S/o Mr. Anand & Mrs. Kavitha Verma</p>
+                    <p class="couple-desc">A gentle soul with a poet's heart and an architect's mind, Aarav finds beauty in the details, whether in the curve of a building or the warmth of a quiet afternoon.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wishes Section -->
+        <section class="wishes-section">
+            <h2 class="wishes-title">Wishes For The Couple</h2>
+            <div class="wishes-carousel">
+                <div class="wish-card">
+                    <p class="wish-message">"Congratulations on your engagement! May this lovely chapter be filled with love, laughter, unforgettable moments, and beautiful dreams. Wishing you both a lifetime of happiness and togetherness ahead."</p>
+                    <p class="wish-author">— Adithya</p>
+                </div>
+                <div class="wishes-nav">
+                    <button onclick="prevWish()"><i class="fas fa-chevron-left"></i></button>
+                    <span>1/3</span>
+                    <button onclick="nextWish()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Send Wishes Section -->
+        <section class="send-wishes">
+            <h2 class="send-wishes-title">Send your wishes</h2>
+            <p class="send-wishes-subtitle">"Leave your blessings and spread a little more love"</p>
+            <form class="wishes-form" onsubmit="submitWish(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Wishes" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </section>
+
+        <!-- Schedule Section -->
+        <section class="schedule-section">
+            <h2 class="schedule-title">Engagement celebration begins</h2>
+            <div class="schedule-cards">
+                <div class="schedule-card">
+                    <i class="fas fa-ring"></i>
+                    <h3>Ring Ceremony</h3>
+                    <p>11:00 AM</p>
+                </div>
+                <div class="schedule-card">
+                    <i class="fas fa-birthday-cake"></i>
+                    <h3>Cake Cutting</h3>
+                    <p>11:30 AM</p>
+                </div>
+                <div class="schedule-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Lunch</h3>
+                    <p>01:00 PM</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="location-section">
+            <h2 class="location-title">Location</h2>
+            <div class="location-content">
+                <div class="location-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.6!3d12.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzAwLjAiTiA3N8KwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1630000000000!5m2!1sen!2sin" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="location-info">
+                    <p>31st October, 2026</p>
+                    <h3>Hall Complex</h3>
+                    <p>Hall Complex, 1st B Cross Road, 7th Block, Koramangala, Bengaluru, Karnataka, India</p>
+                    <button onclick="openMaps()">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Open in Maps
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-branding">
+                <p>engagement Invitation website by <span>Invitationnation</span></p>
+            </div>
+            <div class="footer-links">
+                <a href="https://eng007-livedemo.invitationnation.in/#report">Report a Problem</a>
+                <a href="mailto:marketing@codenimbussolutions.com?subject=Invitation%20Support&body=Hello%20Team,%0A%0AI%20need%20help%20with...">Contact Support</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-bottom">
+                <p>POWERED BY INVITATION NATION</p>
+                <p>© 2026 Invitation Nation. All rights reserved. Crafted with care for your forever.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Door Opening
+        function openDoor() {
+            const doorScreen = document.getElementById('doorScreen');
+            const mainContent = document.getElementById('mainContent');
+            
+            doorScreen.classList.add('hidden');
+            mainContent.classList.add('visible');
+            
+            // Start falling flowers after door opens
+            setTimeout(createFallingFlowers, 500);
+            
+            // Auto-play music when door opens
+            setTimeout(() => {
+                const music = document.getElementById('backgroundMusic');
+                music.play().catch(e => console.log('Audio autoplay was prevented'));
+                updateMusicButton(true);
+            }, 1000);
+        }
+
+        // Music Toggle
+        function toggleMusic() {
+            const music = document.getElementById('backgroundMusic');
+            const musicButton = document.getElementById('musicButton');
+            const musicIcon = document.getElementById('musicIcon');
+            
+            if (music.paused) {
+                music.play();
+                updateMusicButton(true);
+            } else {
+                music.pause();
+                updateMusicButton(false);
+            }
+        }
+
+        function updateMusicButton(isPlaying) {
+            const musicButton = document.getElementById('musicButton');
+            const musicIcon = document.getElementById('musicIcon');
+            
+            if (isPlaying) {
+                musicButton.classList.add('playing');
+                musicIcon.classList.remove('fa-music');
+                musicIcon.classList.add('fa-pause');
+            } else {
+                musicButton.classList.remove('playing');
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-music');
+            }
+        }
+
+        // Falling Flowers Animation
+        function createFallingFlowers() {
+            const container = document.getElementById('fallingFlowers');
+            const yellowFlowers = ['🌸', '�', '�', '�️', '🌼'];
+            const blueFlowers = ['�', '🌷', '💐', '�'];
+            
+            function createFlower() {
+                const flower = document.createElement('div');
+                const isYellow = Math.random() > 0.5;
+                const flowerArray = isYellow ? yellowFlowers : blueFlowers;
+                
+                flower.className = 'flower ' + (isYellow ? 'yellow' : 'blue');
+                flower.textContent = flowerArray[Math.floor(Math.random() * flowerArray.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 4 + 5) + 's'; // Slower falling
+                flower.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                
+                container.appendChild(flower);
+                
+                setTimeout(() => {
+                    flower.remove();
+                }, 9000);
+            }
+            
+            // Create flowers periodically (slower rate)
+            setInterval(createFlower, 1200);
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('October 31, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Wishes Navigation
+        let currentWish = 1;
+        const totalWishes = 3;
+
+        function nextWish() {
+            if (currentWish < totalWishes) {
+                currentWish++;
+                updateWishDisplay();
+            }
+        }
+
+        function prevWish() {
+            if (currentWish > 1) {
+                currentWish--;
+                updateWishDisplay();
+            }
+        }
+
+        function updateWishDisplay() {
+            document.querySelector('.wishes-nav span').textContent = `${currentWish}/${totalWishes}`;
+        }
+
+        // Open Maps
+        function openMaps() {
+            window.open('https://www.google.com/maps/search/?api=1&query=Hall+Complex+Koramangala+Bengaluru', '_blank');
+        }
+
+        // Submit Wish
+        function submitWish(event) {
+            event.preventDefault();
+            alert('Thank you for your wishes!');
+            event.target.reset();
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                document.querySelector(target).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
